@@ -34,6 +34,12 @@ public class Application {
                 new DateToZonedDateTimeConverter()));
     }
 
+    //This doesn't because of existing BUG - https://jira.spring.io/browse/DATAREST-524
+    /*@Bean
+    public CreateTweetValidator beforeCreateTweetValidator() {
+        return new CreateTweetValidator();
+    }*/
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

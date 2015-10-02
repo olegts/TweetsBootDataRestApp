@@ -99,6 +99,12 @@ public class WebAppIntegrationTest {
         assertThat(tweet.text, not(containsString("Murex Stage")));
     }
 
+    @Test(expected = HttpClientErrorException.class)
+    public void testValidator() throws Exception {
+        HttpEntity<String> tweetWithEmptyFields = httpJsonRequestFrom("incorrect_tweet.json");
+        restTemplate.postForLocation("http://localhost:7777/tweets", tweetWithEmptyFields, Object.class);
+    }
+
     private HttpEntity<String> httpJsonRequestFrom(Object object) throws IOException {
         String json = new ObjectMapper().writeValueAsString(object);
         return new HttpEntity<>(json, requestHeaders);
