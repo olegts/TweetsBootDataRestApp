@@ -1,0 +1,29 @@
+{
+  "created_at": "Sun Sep 13 17:35:56 +0300 2015",
+  "entities": {
+    "hashtags": []
+  },
+  "favorite_count": 0,
+  "id": null,
+  "id_str": "643115913563217921",
+  "in_reply_to_status_id": null,
+  "lang": "en",
+  "retweet_count": 0,
+  "retweet status": null,
+  "text": "",
+  "user": {
+    "created_at": "Wed Oct 07 15:54:06 +0300 2009",
+    "description": "http://t.co/ff9AODClc5, Stage Banque Finance & Assurance France/International à destination des Bac-Bac+5 & + (BTS/Ecole de commerce/DECF, etc.) @emploi_banque",
+    "favourites_count": 0,
+    "followers_count": 1380,
+    "friends_count": 141,
+    "id": 80608213,
+    "id_str": "80608213",
+    "lang": "en",
+    "location" : "SanFrancisco",
+    "name": "Stage_Banque_Finance",
+    "screen_name": "Stage_Banque",
+    "statuses_count": 227112,
+    "url": "http://t.co/pC2SfZAKwa"
+  }
+}
