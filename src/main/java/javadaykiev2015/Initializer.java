@@ -31,21 +31,44 @@ public class Initializer implements CommandLineRunner{
 
         validatingRepositoryEventListener.addValidator("beforeCreate", new CreateTweetValidator());
 
-        repository.save(aTweet()
-                .withId("123")
-                .withText("All Blacks won!")
-                .withLang("en")
-                .withCreateTime(ZonedDateTime.now())
-                .withUser(aUser()
-                        .withId("1")
-                        .withName("Oleg")
-                        .withScreenName("tsaltsol")
-                        .withTweetsCount(1)
-                        .withLocation("Kiev")
-                        .withCreateTime(ZonedDateTime.now())
-                        .withURL(new URL("http://localhost:8080/tweets"))
-                        .build())
-                .build());
+        if (!repository.exists("123")) {
+            repository.save(aTweet()
+                    .withId("123")
+                    .withText("All Blacks won!")
+                    .withLang("en")
+                    .withCreateTime(ZonedDateTime.now())
+                    .withUser(aUser()
+                            .withId("1")
+                            .withName("Oleg")
+                            .withScreenName("tsaltsol")
+                            .withTweetsCount(2)
+                            .withFriendsCount(41)
+                            .withFollowersCount(74)
+                            .withLocation("Kiev")
+                            .withCreateTime(ZonedDateTime.now())
+                            .withURL(new URL("http://localhost:8080/tweets"))
+                            .build())
+                    .build());
+        }
+        if (!repository.exists("777")) {
+            repository.save(aTweet()
+                    .withId("777")
+                    .withText("JavaDay Kiev 2015 is comming")
+                    .withLang("en")
+                    .withCreateTime(ZonedDateTime.now())
+                    .withUser(aUser()
+                            .withId("1")
+                            .withName("Oleg")
+                            .withScreenName("tsaltsol")
+                            .withTweetsCount(2)
+                            .withFriendsCount(41)
+                            .withFollowersCount(74)
+                            .withLocation("Kiev")
+                            .withCreateTime(ZonedDateTime.now())
+                            .withURL(new URL("http://localhost:8080/tweets"))
+                            .build())
+                    .build());
+        }
         Tweet tweet = repository.findOne("123");
         System.out.println(tweet);
     }

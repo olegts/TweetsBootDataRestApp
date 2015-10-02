@@ -83,7 +83,7 @@ public class WebAppIntegrationTest {
     public void testSearchByUserName() throws Exception {
         restTemplate.postForLocation("http://localhost:7777/tweets", httpJsonRequestFrom("tweet.json"), Object.class);
 
-        JsonNode node = restTemplate.getForObject("http://localhost:7777/tweets/search/byUser?user=Stage_Banque_Finance", JsonNode.class);
+        JsonNode node = restTemplate.getForObject("http://localhost:7777/tweets/search/byUser?user=Stage_Banque", JsonNode.class);
         assertThat(node.at("/links/0/href").asText(), is("http://localhost:7777/tweets/643115913563217921{?projection}"));
     }
 
