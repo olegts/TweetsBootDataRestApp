@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.hateoas.Identifiable;
 
 import java.time.ZonedDateTime;
 
@@ -13,7 +14,7 @@ import java.time.ZonedDateTime;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Document(collection = "tweets")
-public class Tweet {
+public class Tweet implements Identifiable<String>{
 
     @Id
     public String id;
@@ -61,5 +62,10 @@ public class Tweet {
                 ", createTime=" + createTime +
                 ", user=" + user +
                 '}';
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 }
