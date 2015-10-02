@@ -66,9 +66,8 @@ public class WebAppIntegrationTest {
         assertThat(tweet.user.name, is("Stage_Banque_Finance"));
         System.out.println("@@@Tweet@@@\n" + tweet);
 
-        Tweet compactTweet = restTemplate.getForObject(location+"?projection=compact", Tweet.class);
-        assertThat(compactTweet.text, containsString("Murex Stage"));
-        System.out.println("@@@compactTweet@@@\n"+compactTweet);
+        String compactTweet = restTemplate.getForObject(location+"?projection=compact", String.class);
+        System.out.println("@@@compactTweet@@@\n" + compactTweet);
 
         restTemplate.headForHeaders(location);
         restTemplate.delete(location);
@@ -85,7 +84,7 @@ public class WebAppIntegrationTest {
         restTemplate.postForLocation("http://localhost:7777/tweets", httpJsonRequestFrom("tweet.json"), Object.class);
 
         JsonNode node = restTemplate.getForObject("http://localhost:7777/tweets/search/byUser?user=Stage_Banque_Finance", JsonNode.class);
-        assertThat(node.at("/links/0/href").asText(), is("http://localhost:7777/tweets/643115913563217921"));
+        assertThat(node.at("/links/0/href").asText(), is("http://localhost:7777/tweets/643115913563217921{?projection}"));
     }
 
     @Test

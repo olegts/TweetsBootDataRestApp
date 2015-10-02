@@ -1,5 +1,6 @@
 package javadaykiev2015.repository;
 
+import javadaykiev2015.domain.CompactTweetView;
 import javadaykiev2015.domain.Tweet;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * @author Oleg Tsal-Tsalko
  */
-@RepositoryRestResource(collectionResourceRel = "tweets", path = "tweets")
+@RepositoryRestResource(collectionResourceRel = "tweets", path = "tweets", excerptProjection = CompactTweetView.class)
 public interface TweetRepository extends MongoRepository<Tweet, String> {
 
     @RestResource(path = "byUser", rel = "byUser")
