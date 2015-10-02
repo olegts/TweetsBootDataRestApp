@@ -16,10 +16,10 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "tweets", path = "tweets", excerptProjection = CompactTweetView.class)
 public interface TweetRepository extends MongoRepository<Tweet, String> {
 
-    @RestResource(path = "byUser", rel = "byUser")
-    List<Tweet> findByUserName(@Param("user") String userName);
+    @RestResource(path = "allByUser", rel = "allByUser", exported = false)
+    List<Tweet> findByUserScreenName(@Param("user") String userName);
 
-    @RestResource(path = "byUserWithPaging", rel = "byUserWithPaging")
-    List<Tweet> findByUserName(@Param("user") String userName, Pageable pageable);
+    @RestResource(path = "byUser", rel = "byUser")
+    List<Tweet> findByUserScreenName(@Param("user") String userName, Pageable pageable);
 
 }

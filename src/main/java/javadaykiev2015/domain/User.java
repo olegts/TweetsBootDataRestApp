@@ -2,6 +2,7 @@ package javadaykiev2015.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.net.URL;
@@ -15,16 +16,16 @@ public class User {
 
     public String id;
     public String name;
-    @Field("screen_name")
+    @JsonProperty("screen_name")
     public String screenName;
 
-    @Field("statuses_count")
+    @JsonProperty("statuses_count")
     public long tweetsCount;
-    @Field("favourites_count")
+    @JsonProperty("favourites_count")
     public long favouritesCount;
-    @Field("followers_count")
+    @JsonProperty("followers_count")
     public long followersCount;
-    @Field("friends_count")
+    @JsonProperty("friends_count")
     public long friendsCount;
 
     public String description;
@@ -32,7 +33,7 @@ public class User {
     public URL url;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="EEE MMM dd kk:mm:ss Z yyyy")
-    @Field("created_at")
+    @JsonProperty("created_at")
     public ZonedDateTime createTime;
 
     public User() {

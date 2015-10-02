@@ -3,12 +3,15 @@ package javadaykiev2015;
 import javadaykiev2015.domain.Tweet;
 import javadaykiev2015.repository.TweetRepository;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.List;
 
@@ -22,6 +25,7 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
+@WebAppConfiguration
 @TestPropertySource("/test.properties")
 public class AppIntegrationTest {
 
@@ -50,13 +54,14 @@ public class AppIntegrationTest {
     @Test
     public void testFindByUserOperation() throws Exception {
         Tweet t = aTweet().withId("123").withText("hey").withUser(
-                aUser().withName("Oleg").build()).build();
+                aUser().withScreenName("tsaltsol").build()).build();
         repository.save(t);
 
-        List<Tweet> tweets = repository.findByUserName("Oleg");
+        List<Tweet> tweets = repository.findByUserScreenName("tsaltsol");
         assertThat(tweets.size(), is(1));
     }
 
+    @Before
     @After
     public void cleanResources() throws Exception {
         repository.deleteAll();
