@@ -3,7 +3,6 @@ package javadaykiev2015.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.net.URL;
 import java.time.ZonedDateTime;

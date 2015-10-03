@@ -1,4 +1,4 @@
-package javadaykiev2015.validator;
+package javadaykiev2015.web.validator;
 
 import javadaykiev2015.domain.Tweet;
 import org.slf4j.Logger;

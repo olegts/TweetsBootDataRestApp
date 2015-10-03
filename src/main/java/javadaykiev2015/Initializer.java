@@ -2,7 +2,7 @@ package javadaykiev2015;
 
 import javadaykiev2015.domain.Tweet;
 import javadaykiev2015.repository.TweetRepository;
-import javadaykiev2015.validator.CreateTweetValidator;
+import javadaykiev2015.web.validator.CreateTweetValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.rest.core.event.ValidatingRepositoryEventListener;
@@ -34,7 +34,8 @@ public class Initializer implements CommandLineRunner{
         if (!repository.exists("123")) {
             repository.save(aTweet()
                     .withId("123")
-                    .withText("All Blacks won!")
+                    .withFavoriteCount(50)
+                    .withText("All Blacks won first game of 2015 WorldCup!")
                     .withLang("en")
                     .withCreateTime(ZonedDateTime.now())
                     .withUser(aUser()
@@ -55,7 +56,8 @@ public class Initializer implements CommandLineRunner{
                     .withId("777")
                     .withText("JavaDay Kiev 2015 is comming")
                     .withLang("en")
-                    .withCreateTime(ZonedDateTime.now())
+                    .withFavoriteCount(100)
+                    .withCreateTime(ZonedDateTime.now().plusDays(1))
                     .withUser(aUser()
                             .withId("1")
                             .withName("Oleg")
