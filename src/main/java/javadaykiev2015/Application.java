@@ -1,8 +1,8 @@
 package javadaykiev2015;
 
 import com.mongodb.Mongo;
-import javadaykiev2015.mongo.converter.StringToZonedDateTimeConverter;
-import javadaykiev2015.mongo.converter.ZonedDateTimeToStringConverter;
+import javadaykiev2015.mongo.converter.DateToZonedDateTimeConverter;
+import javadaykiev2015.mongo.converter.ZonedDateTimeToDateConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,8 +30,8 @@ public class Application {
     @Bean
     public CustomConversions mongoConverters(){
         return new CustomConversions(Arrays.asList(
-                new ZonedDateTimeToStringConverter(),
-                new StringToZonedDateTimeConverter()));
+                new ZonedDateTimeToDateConverter(),
+                new DateToZonedDateTimeConverter()));
     }
 
     //This doesn't because of existing BUG - https://jira.spring.io/browse/DATAREST-524

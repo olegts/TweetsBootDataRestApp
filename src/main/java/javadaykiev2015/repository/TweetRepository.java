@@ -1,7 +1,7 @@
 package javadaykiev2015.repository;
 
 import javadaykiev2015.domain.Tweet;
-import javadaykiev2015.web.projection.CompactTweetView;
+import javadaykiev2015.domain.CompactTweetView;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;

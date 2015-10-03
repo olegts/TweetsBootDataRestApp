@@ -1,4 +1,4 @@
-package javadaykiev2015.web.projection;
+package javadaykiev2015.domain;
 
 import javadaykiev2015.domain.Tweet;
 import org.springframework.beans.factory.annotation.Value;
