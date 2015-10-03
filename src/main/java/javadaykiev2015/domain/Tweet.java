@@ -1,8 +1,12 @@
 package javadaykiev2015.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.ZonedDateTime;
 
 /**
  * @author: Oleg Tsal-Tsalko
@@ -14,15 +18,20 @@ public class Tweet {
     @Id
     public String id;
     public String text;
+    public String lang;
+
+    @JsonProperty("favorite_count")
+    public long favoriteCount;
+    @JsonProperty("retweet_count")
+    public long retweetCount;
+
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="EEE MMM dd kk:mm:ss Z yyyy")
+    @JsonProperty("created_at")
+    public ZonedDateTime createTime;
+
     public User user;
 
     public Tweet() {
-    }
-
-    public Tweet(String id, String text, User user) {
-        this.id = id;
-        this.text = text;
-        this.user = user;
     }
 
     @Override
@@ -32,18 +41,13 @@ public class Tweet {
 
         Tweet tweet = (Tweet) o;
 
-        if (id != null ? !id.equals(tweet.id) : tweet.id != null) return false;
-        if (text != null ? !text.equals(tweet.text) : tweet.text != null) return false;
-        return !(user != null ? !user.equals(tweet.user) : tweet.user != null);
+        return !(id != null ? !id.equals(tweet.id) : tweet.id != null);
 
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (text != null ? text.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        return result;
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
@@ -51,6 +55,10 @@ public class Tweet {
         return "Tweet{" +
                 "id='" + id + '\'' +
                 ", text='" + text + '\'' +
+                ", favoriteCount=" + favoriteCount +
+                ", lang='" + lang + '\'' +
+                ", retweetCount=" + retweetCount +
+                ", createTime=" + createTime +
                 ", user=" + user +
                 '}';
     }

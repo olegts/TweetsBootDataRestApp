@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.net.URL;
+import java.time.ZonedDateTime;
+
+import static javadaykiev2015.domain.builder.TweetBuilder.aTweet;
+import static javadaykiev2015.domain.builder.UserBuilder.aUser;
 
 /**
  * @author Oleg Tsal-Tsalko
@@ -19,9 +23,22 @@ public class Initializer implements CommandLineRunner{
 
     @Override
     public void run(String... strings) throws Exception {
-        /*repository.save(new Tweet("123", "bla", null));
-        repository.save(new Tweet(null, "foo", null));
-        List<Tweet> tweets = repository.findAll();
-        System.out.println(tweets);*/
+        repository.save(aTweet()
+                .withId("123")
+                .withText("All Blacks won!")
+                .withLang("en")
+                .withCreateTime(ZonedDateTime.now())
+                .withUser(aUser()
+                        .withId("1")
+                        .withName("Oleg")
+                        .withScreenName("tsaltsol")
+                        .withTweetsCount(1)
+                        .withLocation("Kiev")
+                        .withCreateTime(ZonedDateTime.now())
+                        .withURL(new URL("http://localhost:8080/tweets"))
+                        .build())
+                .build());
+        Tweet tweet = repository.findOne("123");
+        System.out.println(tweet);
     }
 }

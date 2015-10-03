@@ -1,7 +1,6 @@
 package javadaykiev2015;
 
 import javadaykiev2015.domain.Tweet;
-import javadaykiev2015.domain.User;
 import javadaykiev2015.repository.TweetRepository;
 import org.junit.After;
 import org.junit.Test;
@@ -13,6 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+import static javadaykiev2015.domain.builder.TweetBuilder.aTweet;
+import static javadaykiev2015.domain.builder.UserBuilder.aUser;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -29,8 +30,8 @@ public class AppIntegrationTest {
 
     @Test
     public void testBasicCRUDOperations() throws Exception {
-        Tweet t1 = new Tweet("123", "bla", null);
-        Tweet t2 = new Tweet(null, "bla", null);
+        Tweet t1 = aTweet().withId("123").withText("tweet1").build();
+        Tweet t2 = aTweet().withText("tweet2").build();
         repository.save(t1);
         repository.save(t2);
         assertThat(repository.count(), is(2L));
@@ -48,7 +49,8 @@ public class AppIntegrationTest {
 
     @Test
     public void testFindByUserOperation() throws Exception {
-        Tweet t = new Tweet("123", "bla", new User("Oleg", 100));
+        Tweet t = aTweet().withId("123").withText("hey").withUser(
+                aUser().withName("Oleg").build()).build();
         repository.save(t);
 
         List<Tweet> tweets = repository.findByUserName("Oleg");

@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.Charset;
 
+import static javadaykiev2015.domain.builder.TweetBuilder.aTweet;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -63,7 +64,11 @@ public class WebAppIntegrationTest {
         Tweet tweet = restTemplate.getForObject(location, Tweet.class);
         assertThat(tweet.text, containsString("Murex Stage"));
         assertThat(tweet.user.name, is("Stage_Banque_Finance"));
-        System.out.println(tweet);
+        System.out.println("@@@Tweet@@@\n" + tweet);
+
+        Tweet compactTweet = restTemplate.getForObject(location+"?projection=compact", Tweet.class);
+        assertThat(compactTweet.text, containsString("Murex Stage"));
+        System.out.println("@@@compactTweet@@@\n"+compactTweet);
 
         restTemplate.headForHeaders(location);
         restTemplate.delete(location);
@@ -88,7 +93,7 @@ public class WebAppIntegrationTest {
         HttpEntity<String> newTweet = httpJsonRequestFrom("tweet.json");
         URI location = restTemplate.postForLocation("http://localhost:7777/tweets", newTweet, Object.class);
 
-        restTemplate.put(location, httpJsonRequestFrom(new Tweet("123", "Updated tweet", null)));
+        restTemplate.put(location, httpJsonRequestFrom(aTweet().withId("123").withText("Updated tweet").build()));
 
         Tweet tweet = restTemplate.getForObject(location, Tweet.class);
         assertThat(tweet.text, containsString("Updated tweet"));
